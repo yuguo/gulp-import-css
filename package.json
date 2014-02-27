@@ -1,6 +1,6 @@
 {
   "name": "gulp-import-css",
-  "description": "Concatenate css files, rebasing urls and inlining @import",
+  "description": "Import several css files into a single file, one by one, rebasing urls and inlining @import",
   "version": "0.1.0",
   "homepage": "https://github.com/yuguo/gulp-import-css",
   "author": {
@@ -19,6 +19,7 @@
       "url": "https://github.com/yuguo/gulp-import-css/blob/master/LICENSE"
     }
   ],
+  "main": "./index.js",
   "dependencies": {
     "gulp-util": "~2.2.14",
     "through2": "~0.4.1",

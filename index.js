@@ -7,7 +7,7 @@ var gutil = require('gulp-util'),
   through = require('through2');
 
 // Consts
-const PLUGIN_NAME = 'gulp-import-css';
+var PLUGIN_NAME = 'gulp-import-css';
 
 module.exports = function() {
   

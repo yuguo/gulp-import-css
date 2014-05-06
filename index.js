@@ -7,7 +7,7 @@ var gutil = require('gulp-util'),
   through = require('through2');
 
 // Consts
-const PLUGIN_NAME = 'gulp-import-css';
+var PLUGIN_NAME = 'gulp-import-css';
 
 module.exports = function() {
   
@@ -29,6 +29,10 @@ module.exports = function() {
             return url;
           }
           var resourceAbsUrl = path.relative(file.base, path.resolve(path.dirname(file.path), url));
+          
+          // only css file are imported, we leave all other file imports (eot, woff, svg,...) as they are.
+          if (path.extname(resourceAbsUrl) != 'css') return url;
+                    
           return path.relative(destDir, resourceAbsUrl);
         }))
         .toString();

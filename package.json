@@ -1,7 +1,7 @@
 {
   "name": "gulp-import-css",
   "description": "Import several css files into a single file, one by one, rebasing urls and inlining @import",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/yuguo/gulp-import-css",
   "author": {
     "name": "Yuguo"

@@ -10,7 +10,7 @@ var gutil = require('gulp-util'),
 var PLUGIN_NAME = 'gulp-import-css';
 
 module.exports = function() {
-  
+
   return through.obj(function(file, enc, cb) {
     if (file.isStream()) {
       this.emit('error', new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
@@ -22,18 +22,28 @@ module.exports = function() {
       var processedCss = rework(String(file.contents), 'utf-8')
         .use(reworkImporter({
           path: file.path,
-          base: file.base
-        }))
-        .use(rework.url(function(url){
-          if(isUrl(url)) {
-            return url;
+          base: file.base,
+          preProcess: function(ast, options) {
+            return ast
+                .use(rework.url(function(url) {
+                    var srcDir,
+                      resourcePath,
+                      destDir;
+
+                    if (isAbsoluteUrl(url) || isRootRelativeUrl(url)) {
+                      return url;
+                    }
+
+                    // rebase relative url(...) found in CSS to be imported
+                    // @import url(...) handled by rework-importer; not passed through here
+
+                    srcDir = path.dirname(options.path);
+                    resourcePath = path.resolve(srcDir, url);
+                    destDir = path.dirname(file.path);
+
+                    return path.relative(destDir, resourcePath);
+                }));
           }
-          var resourceAbsUrl = path.relative(file.base, path.resolve(path.dirname(file.path), url));
-          
-          // only css file are imported, we leave all other file imports (eot, woff, svg,...) as they are.
-          if (path.extname(resourceAbsUrl) != 'css') return url;
-                    
-          return path.relative(destDir, resourceAbsUrl);
         }))
         .toString();
     } catch(err) {
@@ -47,8 +57,10 @@ module.exports = function() {
   });
 };
 
-function isUrl(url) {
+function isAbsoluteUrl(url) {
   return (/^[\w]+:\/\/./).test(url);
 }
 
-
+function isRootRelativeUrl(url) {
+  return url.charAt(0) === '/';
+}

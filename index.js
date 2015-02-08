@@ -25,7 +25,7 @@ module.exports = function() {
           base: file.base
         }))
         .use(rework.url(function(url){
-          if(isUrl(url)) {
+          if(isUrl(url) || isInlineResource(url)) {
             return url;
           }
           var resourceAbsUrl = path.relative(file.base, path.resolve(path.dirname(file.path), url));
@@ -51,4 +51,6 @@ function isUrl(url) {
   return (/^[\w]+:\/\/./).test(url);
 }
 
-
+function isInlineResource(url) {
+  return (/^data:[^;]+;base64,/).test(url);
+}

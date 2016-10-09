@@ -1,4 +1,4 @@
-gulp-import-css
+gulp-import-css [![Build Status](https://travis-ci.org/yuguo/gulp-import-css.svg?branch=master)](https://travis-ci.org/yuguo/gulp-import-css)
 ===============
 
 Import several css files into a single file, one by one, rebasing urls and inlining @import

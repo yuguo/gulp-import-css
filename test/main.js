@@ -1,5 +1,5 @@
-var should = require('should'),
-    less = require('../'),
+var should = require('chai').should(),
+    importCss = require('../'),
     gutil = require('gulp-util'),
     fs = require('fs'),
     pj = require('path').join;
@@ -20,9 +20,9 @@ describe('gulp-import-css', function () {
   describe('imporCss()', function () {
 
     it('should compile single css file', function (done) {
-      var lessFile = createVinyl('home.css');
+      var destFile = createVinyl('home.css');
 
-      var stream = less();
+      var stream = importCss();
       stream.once('data', function (cssFile) {
         should.exist(cssFile);
         should.exist(cssFile.path);
@@ -33,9 +33,20 @@ describe('gulp-import-css', function () {
           fs.readFileSync(pj(__dirname, 'expect/home.css'), 'utf8'));
         done();
       });
-      stream.write(lessFile);
+      stream.write(destFile);
       stream.end();
     });
 
   });
 });
+
+/**
+ * todo:
+ * @import url("fineprint.css") print;
+ * @import url("bluish.css") projection, tv;
+ * @import 'custom.css';
+ * @import url("chrome://communicator/skin/");
+ * @import 'http://fonts.googleapis.com/css?family=Montserrat:400,900';
+ * @import "common.css" screen, projection;
+ * @import url('landscape.css') screen and (orientation:landscape);
+**/

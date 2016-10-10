@@ -1,7 +1,6 @@
 'use strict';
 var gutil = require('gulp-util'),
   path = require('path'),
-  fs = require('fs'),
   rework = require('rework'),
   reworkImporter = require('rework-importer'),
   through = require('through2');
@@ -16,7 +15,6 @@ module.exports = function() {
       this.emit('error', new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
       return cb();
     }
-
 
     try {
       var processedCss = rework(String(file.contents), 'utf-8')

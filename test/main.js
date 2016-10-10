@@ -1,8 +1,8 @@
-var should = require('should');
-var less = require('../');
-var gutil = require('gulp-util');
-var fs = require('fs');
-var pj = require('path').join;
+var should = require('should'),
+    less = require('../'),
+    gutil = require('gulp-util'),
+    fs = require('fs'),
+    pj = require('path').join;
 
 function createVinyl(lessFileName, contents) {
   var base = pj(__dirname, 'fixtures');

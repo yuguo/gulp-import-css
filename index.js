@@ -28,7 +28,7 @@ module.exports = function() {
                       resourcePath,
                       destDir;
 
-                    if (isAbsoluteUrl(url) || isRootRelativeUrl(url)) {
+                    if (isAbsoluteUrl(url) || isRootRelativeUrl(url) || isBase64Url(url)) {
                       return url;
                     }
 
@@ -61,4 +61,9 @@ function isAbsoluteUrl(url) {
 
 function isRootRelativeUrl(url) {
   return url.charAt(0) === '/';
+}
+
+//skip base64
+function isBase64Url(url) {
+  return (/^data:image\//).test(url);
 }

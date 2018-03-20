@@ -1,6 +1,5 @@
 {
     "parser": "espree",
-    "ecmaFeatures": {},
     "rules": {
         "no-alert": "off",
         "no-array-constructor": "off",

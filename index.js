@@ -1,5 +1,5 @@
 'use strict';
-var gutil = require('gulp-util'),
+var PluginError = require('plugin-error'),
   path = require('path'),
   rework = require('rework'),
   reworkImporter = require('rework-importer'),
@@ -12,7 +12,7 @@ module.exports = function() {
 
   return through.obj(function(file, enc, cb) {
     if (file.isStream()) {
-      this.emit('error', new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
+      this.emit('error', new PluginError(PLUGIN_NAME, 'Streaming not supported'));
       return cb();
     }
 
@@ -45,7 +45,7 @@ module.exports = function() {
         }))
         .toString();
     } catch(err) {
-      this.emit('error', new gutil.PluginError(PLUGIN_NAME, err));
+      this.emit('error', new PluginError(PLUGIN_NAME, err));
       return cb();
     }
 

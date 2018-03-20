@@ -21,15 +21,16 @@
   ],
   "main": "./index.js",
   "dependencies": {
-    "gulp-util": "~2.2.14",
-    "through2": "~0.4.1",
+    "plugin-error": "~1.0.1",
+    "rework": "~0.20.2",
     "rework-importer": "~0.4.0",
-    "rework": "~0.20.2"
+    "through2": "~0.4.1",
+    "vinyl": "~2.1.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.7.1",
-    "mocha": "^3.1.0"
+    "chai": "^4.1.2",
+    "eslint": "^4.19.0",
+    "mocha": "^5.0.4"
   },
   "scripts": {
     "test": "eslint index.js && mocha --reporter spec test/main"

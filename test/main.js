@@ -1,6 +1,6 @@
 var should = require('chai').should(),
     importCss = require('../'),
-    gutil = require('gulp-util'),
+    Vinyl = require('vinyl'),
     fs = require('fs'),
     pj = require('path').join;
 
@@ -8,7 +8,7 @@ function createVinyl(lessFileName, contents) {
   var base = pj(__dirname, 'fixtures');
   var filePath = pj(base, lessFileName);
 
-  return new gutil.File({
+  return new Vinyl({
     cwd: __dirname,
     base: base,
     path: filePath,
